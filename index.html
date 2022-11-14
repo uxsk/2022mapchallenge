@@ -122,7 +122,7 @@
         if (sqrt >= 0.2) { return sqrt; }
         if (sqrt < 0.2) { return 0.3; }
       })
-      .pointsMerge(true)
+      .pointsMerge(false)
       .pointLabel(d => `${d.country}, ${d.tonnes} tonnes `)
       .pointResolution(6)
 
