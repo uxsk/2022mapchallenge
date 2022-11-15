@@ -131,6 +131,7 @@
     });
 
     setTimeout(() => { // wait for scene to be populated (asynchronously)
+      const scene = new THREE.Scene();
       const hemilight = new THREE.HemisphereLight( 0x080820, 0xffffbb, 0.5 );
       scene.add( hemilight );
     });
