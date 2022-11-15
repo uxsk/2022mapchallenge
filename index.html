@@ -8,18 +8,17 @@
     <title>#30DayMapChallenge by Kontur.io</title>
     <meta name="description" content="Australia waste export 2021-2022">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta property="og:image" content="30daymapchallenge-19.png">
+    <meta property="og:image" content="30daymapchallenge-preview.png">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1080">
     <meta property="og:image:type" content="image/png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@KonturInc">
     
-    
+    <script src="//unpkg.com/three"></script>
     <script src="//unpkg.com/d3-dsv"></script>
     <script src="//unpkg.com/index-array-by"></script>
     <script src="//unpkg.com/globe.gl"></script>
-    <script src="//unpkg.com/three"></script>
     <!--<script src="../../dist/react-globe.gl.js"></script>-->
   </head>
 
@@ -31,7 +30,6 @@
     </a>
   </div>
   <div id="footer">
-    <!-- <h1>Australian waste export in Jul 2021 - Jun 2022</h1> -->
     <h1>7 440 070 tonnes of waste </br>were exported by Australia from Jul 2021 - Jun 2022</h1>
     <p>Almost half of the waste was imported by three countries: Indonesia, India, and Vietnam.</br>
     The most popular categories are Metals (60%) and Paper&Cardboard (25%).</br>
@@ -86,7 +84,7 @@
       .atmosphereAltitude("0.15")
       .pointOfView({ lat: -10.4878279, lng: 105.6329821, altitude: 2 })
       .showAtmosphere(true) 
-      .atmosphereColor("#3a228a")
+      .atmosphereColor("#26ABFF")
 
       .arcLabel(d => `${d.country}, ${d.tonnes} tonnes `)
       .arcStartLat(+(-25.7349684916223))
@@ -99,21 +97,13 @@
       .arcDashAnimateTime(3000)
       .arcColor(d => [`rgba(0, 255, 0, ${OPACITY})`, `rgba(38, 171, 255, ${OPACITY})`])
       .arcsTransitionDuration(4000)
-      .arcStroke(0.3)
+      .arcStroke(0.35)
       .onArcHover(hoverArc => myGlobe
         .arcColor(d => {
           const op = !hoverArc ? OPACITY : d === hoverArc ? 0.9 : OPACITY / 4;
           return [`rgba(0, 255, 0, ${op})`, `rgba(38, 171, 255, ${op})`];
         })
       )
-      // .onArcClick(arcClicked, click, { arcEndLat, arcEndLng, 2 })
-      // .onArcClick(clickArc => myGlobe
-      //   .pointOfView(d => { 
-      //       // lat: -10.4878279, lng: 105.6329821, altitude: 2; 
-      //       console.log("jdj");
-      //     })
-      //   )
-      
       
       .pointColor(() => '#26ABFF')
       .pointAltitude(0.004)
@@ -124,10 +114,7 @@
       })
       .pointsMerge(false)
       .pointLabel(d => `${d.country}, ${d.tonnes} tonnes `)
-      .pointResolution(6)
-
-    // scene.fog = new THREE.Fog(0x535ef3, 220, 260);
-    
+      .pointResolution(6)    
 
     const countryParse = ([countryId, country, lat, lng, tonnes]) => ({ countryId, country, lat, lng, tonnes });
 
@@ -143,30 +130,9 @@
       .arcsData(countries);
     });
 
-    // const globeMaterial = myGlobe.globeMaterial();
-    // globeMaterial.bumpScale = 1;
-    // new THREE.TextureLoader().load('water_8k.png', texture => {
-    //   globeMaterial.specularMap = texture;
-    //   globeMaterial.specular = new THREE.Color('#fff');
-    //   globeMaterial.shininess = 1;
-    //   // globeMaterial.emissive = new THREE.Color('#220038');
-    //   // globeMaterial.emissiveIntensity = 10;
-    // });
-    
     setTimeout(() => { // wait for scene to be populated (asynchronously)
-      //light
-      // const ddirectionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
-      // ddirectionalLight.position.set(-10,-10,20);
-      // ddirectionalLight.target.position.set(10,0,20);
-      // scene.add( ddirectionalLight );
-
       const hemilight = new THREE.HemisphereLight( 0x080820, 0xffffbb, 0.5 );
       scene.add( hemilight );
-
-      // const dLight = new THREE.DirectionalLight(0xffffff, 0.8);
-      // dLight.position.set(-2, -2, 4);
-      // scene.add(dLight);
-
     });
   </script>
   </body>
